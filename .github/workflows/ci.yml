@@ -44,6 +44,14 @@ jobs:
           cd frontend
           npm ci
           npm run build
+
+  api-test:
+    runs-on: ubuntu-latest
+    steps:
+    - name: API测试
+      run: |
+        npm install -g newman
+        newman run apifox/collection.json
   
   docker-push:
     needs: [backend-build, frontend-build]
