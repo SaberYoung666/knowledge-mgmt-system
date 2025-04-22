@@ -1,6 +1,8 @@
 import { createApp } from 'vue'
 import App from './App.vue'
 import { registerSW } from 'virtual:pwa-register'
+import VueEasymde from 'vue3-easymde'
+import 'easymde/dist/easymde.min.css'
 
 const app = createApp(App)
 
@@ -13,4 +15,5 @@ const updateSW = registerSW({
   }
 })
 
+app.use(VueEasymde)
 app.mount('#app')

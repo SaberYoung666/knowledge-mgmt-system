@@ -1,12 +1,11 @@
-<script setup lang="ts">
-import NoteEditor from './components/NoteEditor.vue';
-
-</script>
-
 <template>
-  <NoteEditor/>
+  <div id="app">
+    <tiptap />
+  </div>
 </template>
 
-<style scoped>
+<script setup lang="ts">
+import Tiptap from "./components/Tiptap.vue";
+</script>
 
-</style>
+<style scoped></style>

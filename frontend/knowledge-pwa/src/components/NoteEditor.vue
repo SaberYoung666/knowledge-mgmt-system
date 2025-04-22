@@ -1,41 +1,39 @@
+<template>
+  <vue-easymde
+    v-model="markdownText"
+    ref="editorInstance"
+  />
+</template>
+
 <script setup lang="ts">
-import { ref } from 'vue'
-import { dbService } from '../utils/db'
+import { ref } from "vue";
+import { dbService } from "../utils/db";
+import type { EditorInstance } from 'vue3-easymde'
 
 const newNote = ref({
-  title: '',
-  content: ''
-})
+  title: "",
+  content: "",
+});
 
 const handleSave = async () => {
   try {
-    await dbService.saveNote(newNote.value)
-    newNote.value = { title: '', content: '' }
-    alert('保存成功!')
+    await dbService.saveNote(newNote.value);
+    newNote.value = { title: "", content: "" };
+    alert("保存成功!");
   } catch (error) {
-    console.error('保存失败:', error)
-    alert('保存失败，请检查控制台')
+    console.error("保存失败:", error);
+    alert("保存失败，请检查控制台");
   }
+};
+
+const markdownText = ref('Hello **EasyMDE**!')  // 初始内容
+const editorInstance = ref<EditorInstance | null>(null)
+
+// 获取底层 EasyMDE 实例
+const getRawInstance = () => {
+  console.log(editorInstance.value?.getMDEInstance())
 }
 </script>
-
-<template>
-  <div class="editor-container">
-    <input 
-      v-model="newNote.title" 
-      placeholder="笔记标题"
-      class="title-input"
-    />
-    <textarea
-      v-model="newNote.content"
-      placeholder="开始记录..."
-      class="content-textarea"
-    ></textarea>
-    <button @click="handleSave" class="save-button">
-      保存笔记
-    </button>
-  </div>
-</template>
 
 <style scoped>
 .editor-container {
